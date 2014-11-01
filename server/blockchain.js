@@ -15,7 +15,7 @@ function ping(cb) {
 
 function init(app) {
   app.get('/ping', function (req, res) {
-    blockchain.ping(function(bRes) {
+    ping(function(bRes) {
       if (bRes) {
         res.send('Ping succeeded');
       } else {

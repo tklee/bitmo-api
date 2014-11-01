@@ -17,14 +17,31 @@ function addUser(aUser) {
   });
 }
 
-function findUserByNumber(aNumber) {
+function init(app) {
+  app.get('/findTest', function (req, res) {
+    findUserByNumber("4082223333", function(bRes) {
+      if (bRes) {
+        res.send('find succeeded');
+      } else {
+        res.send('find failed');
+      }
+    });
+  });
+}
+
+function findUserByNumber(aNumber, cb) {
   User.find({ "number": aNumber }, function (err, docs) {
-    console.log(docs)
-    return docs[0];
+    // dangerous to keep waiting
+    if (docs[0]) {
+      cb(true)
+    } else {
+      cb(false)
+    }
   })
 };
 
 module.exports = {
   addUser: addUser,
-  findUserByNumber: findUserByNumber
+  findUserByNumber: findUserByNumber,
+  init: init
 }

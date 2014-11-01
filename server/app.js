@@ -4,6 +4,7 @@ var app = express()
 var u = require('./users.js')
 
 blockchain.init(app);
+u.init(app);
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
