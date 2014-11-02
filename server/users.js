@@ -15,10 +15,15 @@ var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000
 
 var mongodbUri = 'mongodb://heroku_app31209122:j2qhlnv9ad4jpatu57gg69vefq@ds049180.mongolab.com:49180/heroku_app31209122';
 
-mongoose.connect('mongodb://localhost/test');
-//mongoose.connect(mongodbUri, options);
+//mongoose.connect('mongodb://localhost/test');
+mongoose.connect(mongodbUri, options);
+var conditions = { number: "4083904157" }, update = { guid: "d6eebfb4-f5c9-4104-94a8-00c8e8ca06c7" }, options = { multi: true };
 
 var User = mongoose.model('User', { number: String, guid: String, address: String, link: String, name: String, password: String });
+function callback (err, numAffected) {
+  console.log(numAffected);
+}
+User.update(conditions, update, options, callback);
 
 var defaultHandler = function (err) {
   if (err) // ...
