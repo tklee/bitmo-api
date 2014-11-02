@@ -46,7 +46,8 @@ function init(app) {
     });
   });
   app.post('/user', function (req, res) {
-    console.log(req.body);
+    console.log(req);
+    res.send();
   });
 }
 
