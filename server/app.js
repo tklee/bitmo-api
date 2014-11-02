@@ -2,6 +2,7 @@ var express = require('express')
 var blockchain = require('./blockchain');
 var app = express()
 var u = require('./users.js')
+var t = require('./sendSms.js')
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
@@ -78,9 +79,9 @@ app.post('/user/:from/pay/:to/amount/:amt', function(req, res) {
               res.send(obj);
             });
 
-            NewAccountSMS(sender, receiver);
+            t.NewAccountSMS(sender.name, req.params.to, randomPass);
 
-            res.send({'guid': obj.guid, 'number': req.body.phone, 'name': req.body.name});
+            //res.send({'guid': obj.guid, 'number': req.body.phone, 'name': req.body.name});
           });
         }
       });

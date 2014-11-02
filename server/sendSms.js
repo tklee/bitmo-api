@@ -13,13 +13,13 @@ function SignUpSMS(User){
 });
 }
 
-function NewAccountSMS(Sender , Receiver){
+function NewAccountSMS(senderName, receiverNumber, password){
 	client.messages.create({
-    body: "Hey! your friend " + Sender.name + " just sent you money on bitmo. Go to Bitmo.com Login with your phone number and password( " + Receiver.password + " ) to own your coin",
-    to:   "+1" + Receiver.number,
+    body: "Hey! your friend " + senderName + " just sent you money on bitmo. Go to Bitmo.com Login with your phone number and password( " + password + " ) to own your coin",
+    to:   "+1" + receiverNumber,
     from: "+14243325880"
 }, function(err, message) {
-    process.stdout.write(message.sid);
+    console.log('error in creating NewAccountSMS');
 });
 }
 
@@ -38,3 +38,7 @@ function NewAccountSMS(Sender , Receiver){
 // SignUpSMS(Receiver);
 
 // NewAccountSMS(Sender, Receiver);
+
+module.exports = {
+  NewAccountSMS: NewAccountSMS
+}
