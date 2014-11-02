@@ -19,7 +19,7 @@ function ping(cb) {
     });
 }
 
-function sendPayment(guid, password, to, amt) {
+function sendPayment(guid, password, to, amt, cb) {
   var path = '/merchant' + guid + '/payment';
 
   agent.post(getBlockchainUrl(path))
