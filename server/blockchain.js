@@ -57,7 +57,8 @@ function createWallet(password, cb) {
           try {
             var json = JSON.parse(res.text);
             cb(json);
-            console.log('createWallet: ' + json);
+            console.log('createWallet');
+            console.log(json);
           } catch(e) {
             console.log('createWallet: Failed to parse JSON');
             console.log(res);
@@ -69,6 +70,37 @@ function createWallet(password, cb) {
           console.log('createWallet: Failed to create wallet.');
         }
     });
+}
+
+function getBalance(guid, password, cb) {
+  var path = '/merchant/' + guid + '/balance';
+  console.log(getBlockchainUrl(path));
+  agent.get(getBlockchainUrl(path))
+    .accept('application/json')
+    .query({ 'password' : password})
+    .end(function(res) {
+      if (res.status == "200" && res.text) {
+        try {
+          var json = JSON.parse(res.text);
+          cb(json);
+          console.log('getBalance');
+          console.log(json);
+        } catch(e) {
+          console.log('getBalance: Failed to parse JSON');
+          console.log(res);
+          cb({'error' : 'Failed to parse JSON.', 'xmlres' : res});
+        }
+      } else if (res.status == "200") {
+        console.log("getBalance: Blockchain response is empty");
+        cb({'error' : 'Blockchain response is empty'});
+      } else {
+        var errmsg = res.text || 'Failed to getBalance.';
+        cb({'error' : errmsg, 'xmlres' : res});
+        console.log('getBalance: Failed to create wallet.');
+        console.log(res);
+      }
+    });
+
 }
 
 function init(app) {
@@ -86,6 +118,13 @@ function init(app) {
 
   app.post('/bc/wallet', function(req, res) {
     createWallet(req.body.password, function(obj) {
+      res.send(obj);
+    });
+  });
+
+  app.get('/bc/:guid', function(req, res) {
+    var password = req.query.password;
+    getBalance(req.params.guid, password, function(obj) {
       res.send(obj);
     });
   });

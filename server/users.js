@@ -11,12 +11,15 @@ mongoose.connect('mongodb://localhost/test');
 
 var User = mongoose.model('User', { number: String, guid: String, address: String, link: String, name: String, password: String });
 
-function addUser(aUser) {
+var defaultHandler = function (err) {
+  if (err) // ...
+  console.log('Failed to save');
+};
+
+function addUser(aUser, cb) {
   var user = new User({ number: aUser.number, guid: aUser.guid, address: aUser.address, link: aUser.link, name: aUser.name, password: aUser.password });
-  user.save(function (err) {
-    if (err) // ...
-    console.log('Failed to save');
-  });
+  cb = cb || defaultHandler;
+  user.save(cb);
 }
 
 // function init(app) {

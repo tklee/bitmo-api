@@ -47,8 +47,16 @@ app.post('/account', function(req, res) {
       'link': newWallet.link,
       'name': req.body.name,
       'password': req.body.password
+    }, function(err) {
+      if (err) {
+        res.send(err);
+      } else {
+
+        res.send(newWallet);        
+      }
+
     });
-    res.send(obj);
+
   });
 })
 
