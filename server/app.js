@@ -38,12 +38,12 @@ app.get('/testSearch', function (req, res) {
 })
 
 app.post('/account', function(req, res) {
-  blockchain.createWallet(req.body.password, function(obj) {
+  blockchain.createWallet(req.body.password, function(newWallet) {
     u.addUser({
       'number': req.body.phone,
-      'guid':  obj.guid,
-      'address': obj.address,
-      'link': obj.link,
+      'guid':  newWallet.guid,
+      'address': newWallet.address,
+      'link': newWallet.link,
       'name': req.body.name,
       'password': req.body.password
     });
