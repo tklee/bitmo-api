@@ -73,7 +73,7 @@ function createWallet(password, cb) {
 }
 
 function init(app) {
-  app.get('/ping', function (req, res) {
+  app.get('/bc/ping', function (req, res) {
     ping(function(bRes) {
       if (bRes) {
         res.send('Ping succeeded');
@@ -83,13 +83,13 @@ function init(app) {
     });
   });
 
-  app.post('/:guid/pay/:to/amount/:amt', function(req, res) {
+  app.post('/bc/:guid/pay/:to/amount/:amt', function(req, res) {
     sendPayment(req.params.guid, req.query.password, req.params.to, req.params.amt, function(obj) {
       res.send(obj);
     });
   });
 
-  app.post('/wallet', function(req, res) {
+  app.post('/bc/wallet', function(req, res) {
     createWallet(req.body.password, function(obj) {
       res.send(obj);
     });

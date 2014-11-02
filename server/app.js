@@ -37,6 +37,22 @@ app.get('/testSearch', function (req, res) {
   res.send(u.findUserByNumber("4082223333").number);
 })
 
+
+app.post('/acount', function(req, res) {
+  blockchain.createWallet(req.body.password, function(obj) {
+    u.addUser({
+      'number': req.body.phone,
+      'guid':  obj.guid,
+      'address': obj.address,
+      'link': obj.link,
+      'name': req.body.name,
+      'password': req.body.password
+    });
+    res.send(obj);
+  });
+
+})
+
 var server = app.listen(3000, function () {
 
   var host = server.address().address
