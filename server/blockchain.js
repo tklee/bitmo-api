@@ -25,7 +25,7 @@ function sendPayment(guid, password, to, amt, cb) {
   agent.post(getBlockchainUrl(path))
     .set('Content-Type', 'application/x-www-form-urlencoded')
     .accept('application/json')
-    .send({ 'main_password' : password, 'to' : to, 'amount' : amt})
+    .send({ 'password' : password, 'to' : to, 'amount' : amt})
     .end(function(res) {
       if (res.status == "200") {
         try {
