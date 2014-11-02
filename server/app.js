@@ -10,8 +10,7 @@ var sleep = require('sleep');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var allowCrossDomain = function(req, res, next) {
  res.header('Access-Control-Allow-Origin', '*');
