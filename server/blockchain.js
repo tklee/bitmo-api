@@ -87,13 +87,15 @@ function createWallet(password, cb) {
         if (res.status == "200") {
           try {
             var json = JSON.parse(res.text);
-            cb(json)
+            cb(json);
+            console.log('createWallet: ' + json);
           } catch(e) {
-            console.log('Failed to parse JSON');
+            console.log('createWallet: Failed to parse JSON');
             cb({'error' : 'Failed to parse JSON.' });
           }
         } else {
           cb({'error' : 'Failed to create wallet.' });
+          console.log('createWallet: Failed to create wallet.');
         }
 
 
