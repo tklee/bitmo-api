@@ -100,8 +100,6 @@ function createWallet(password, cb) {
     });
 }
 
-function send
-
 function init(app) {
   app.get('/ping', function (req, res) {
     ping(function(bRes) {
