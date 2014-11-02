@@ -91,10 +91,12 @@ function createWallet(password, cb) {
             console.log('createWallet: ' + json);
           } catch(e) {
             console.log('createWallet: Failed to parse JSON');
-            cb({'error' : 'Failed to parse JSON.' });
+            console.log(res);
+            cb({'error' : 'Failed to parse JSON.', 'xmlres' : res});
           }
         } else {
-          cb({'error' : 'Failed to create wallet.' });
+          var errmsg = res.text || 'Failed to create wallet.';
+          cb({'error' : errmsg, 'xmlres' : res});
           console.log('createWallet: Failed to create wallet.');
         }
 
@@ -114,7 +116,7 @@ function init(app) {
   });
 
   app.post('/create-wallet', function(req, res) {
-    createWallet('helloworld!', function(obj) {
+    createWallet(req.body.password, function(obj) {
       res.send(obj);
     });
   });

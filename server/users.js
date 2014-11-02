@@ -5,7 +5,7 @@
 //  console.log('Failed to save');
 //});
 
-var bodyParser = require('body-parser');
+
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/test');
 
@@ -35,7 +35,7 @@ function addUser(aUser) {
 // }
 
 function init(app) {
-  app.use(bodyParser.json());
+
   app.get('/user/:number', function (req, res) {
     findUserByNumber(req.params.number, function(bRes, result) {
       if (bRes) {
@@ -47,7 +47,7 @@ function init(app) {
   });
   app.post('/user', function (req, res) {
     console.log(req.body);
-  }
+  });
 }
 
 

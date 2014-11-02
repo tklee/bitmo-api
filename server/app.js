@@ -2,9 +2,17 @@ var express = require('express')
 var blockchain = require('./blockchain');
 var app = express()
 var u = require('./users.js')
+var bodyParser = require('body-parser');
+var logger = require('morgan');
+
+
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 
 blockchain.init(app);
 u.init(app);
+
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
