@@ -8,8 +8,7 @@ function getBlockchainUrl(path) {
 
 
 function ping(cb) {
-
-  agent.get(getBlockchainUrl())
+  agent.get(getBlockchainUrl('/'))
     .end(function(res) {
       console.log(res);
       if (res.ok) {
@@ -75,11 +74,7 @@ function createWallet(password, cb) {
 function init(app) {
   app.get('/bc/ping', function (req, res) {
     ping(function(bRes) {
-      if (bRes) {
-        res.send('Ping succeeded');
-      } else {
-        res.send('Ping failed');
-      }
+      res.send({ 'success' : bRes});
     });
   });
 
