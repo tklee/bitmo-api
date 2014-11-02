@@ -59,7 +59,7 @@ app.post('/user/:from/pay/:to/amount/:amt', function(req, res) {
       u.findUserByNumber(req.params.to, function(receiverFound, receiver) {
 
         if (receiverFound) {
-          blockchain.sendPayment(sender.guid, sender.password, receiver.guid, req.params.amt, function(obj) {
+          blockchain.sendPayment(sender.guid, sender.password, receiver.address, req.params.amt, function(obj) {
             res.send(obj);
           });
         } else {
@@ -75,7 +75,7 @@ app.post('/user/:from/pay/:to/amount/:amt', function(req, res) {
               'password': randomPass
             });
 
-            blockchain.sendPayment(sender.guid, sender.password, newWallet.guid, req.params.amt, function(obj) {
+            blockchain.sendPayment(sender.guid, sender.password, newWallet.address, req.params.amt, function(obj) {
               res.send(obj);
             });
 
