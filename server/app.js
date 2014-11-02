@@ -129,10 +129,7 @@ app.post('/user/:phone/pay/:to/amount/:amt', function(req, res) {
 })
 */
 
-if(process.env.PORT == 58537){
-  process.env.PORT = 27017;
-}
-var port = Number(process.env.PORT || 3000)
+var port = 27017;
 
 var server = app.listen(port, function () {
 
