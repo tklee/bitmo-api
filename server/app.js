@@ -37,7 +37,6 @@ app.get('/testSearch', function (req, res) {
   res.send(u.findUserByNumber("4082223333").number);
 })
 
-
 app.post('/account', function(req, res) {
   blockchain.createWallet(req.body.password, function(obj) {
     u.addUser({
@@ -52,6 +51,46 @@ app.post('/account', function(req, res) {
   });
 })
 
+app.post('/user/:from/pay/:to/amount/:amt', function(req, res) {
+  u.findUserByNumber(req.params.from, function(senderFound, sender) {
+
+    if (senderFound) {
+      u.findUserByNumber(req.params.to, function(receiverFound, receiver) {
+
+        if (receiverFound) {
+          blockchain.sendPayment(sender.guid, sender.password, receiver.guid, req.params.amt, function(obj) {
+            res.send(obj);
+          });
+        } else {
+          var randomPass = "RANDOM";
+
+          blockchain.createWallet(randomPass, function(newWallet) {
+            u.addUser({
+              'number': req.params.to,
+              'guid':  newWallet.guid,
+              'address': newWallet.address,
+              'link': newWallet.link,
+              'name': '',
+              'password': randomPass
+            });
+
+            blockchain.sendPayment(sender.guid, sender.password, newWallet.guid, req.params.amt, function(obj) {
+              res.send(obj);
+            });
+
+            NewAccountSMS(sender, receiver);
+
+            res.send({'guid': obj.guid, 'number': req.body.phone, 'name': req.body.name});
+          });
+        }
+      });
+    } else {
+      res.send({ 'error' : 'User does not have an account'});
+    }
+  });
+})
+
+/*
 app.post('/user/:phone/pay/:to/amount/:amt', function(req, res) {
   u.findUserByNumber(req.params.phone, function(bRes, result) {
     if (bRes) {
@@ -63,6 +102,7 @@ app.post('/user/:phone/pay/:to/amount/:amt', function(req, res) {
     }
   });
 })
+*/
 
 var server = app.listen(3000, function () {
 
