@@ -41,7 +41,7 @@ function init(app) {
       if (bRes) {
         res.send(result);
       } else {
-        res.send(result);
+        res.send({});
       }
     });
   });
