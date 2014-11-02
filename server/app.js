@@ -47,7 +47,7 @@ app.post('/account', function(req, res) {
       'name': req.body.name,
       'password': req.body.password
     });
-    res.send({'guid': obj.guid, 'number': req.body.phone, 'name': req.body.name});
+    res.send(obj);
   });
 })
 
@@ -92,6 +92,15 @@ app.post('/user/:from/pay/:to/amount/:amt', function(req, res) {
 
 /*
 app.post('/user/:phone/pay/:to/amount/:amt', function(req, res) {
+  u.findUserByNumber(req.params.phone, function(bRes, result) {
+    if (bRes) {
+      blockchain.sendPayment(result.guid, result.password, req.params.to, req.params.amt, function(obj) {
+        res.send(obj);
+      });
+    } else {
+      res.send({});
+    }
+  });
   u.findUserByNumber(req.params.phone, function(bRes, result) {
     if (bRes) {
       blockchain.sendPayment(result.guid, result.password, req.params.to, req.params.amt, function(obj) {
