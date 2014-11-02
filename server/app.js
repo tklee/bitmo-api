@@ -38,7 +38,7 @@ app.get('/testSearch', function (req, res) {
 })
 
 
-app.post('/acount', function(req, res) {
+app.post('/account', function(req, res) {
   blockchain.createWallet(req.body.password, function(obj) {
     u.addUser({
       'number': req.body.phone,
