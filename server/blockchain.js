@@ -99,5 +99,6 @@ function init(app) {
 
 module.exports = {
   ping: ping,
-  init: init
+  init: init,
+  createWallet: createWallet
 }
