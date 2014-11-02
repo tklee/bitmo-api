@@ -7,8 +7,9 @@ var logger = require('morgan');
 
 
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+
 
 blockchain.init(app);
 u.init(app);
