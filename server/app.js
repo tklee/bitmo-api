@@ -74,7 +74,7 @@ app.post('/user/:from/pay/:to/amount/:amt', function(req, res) {
             res.send(obj);
           });
         } else {
-          var randomPass = "RANDOM";
+          var randomPass = "RANDOMPASSWORD123456";
 
           blockchain.createWallet(randomPass, function(newWallet) {
             u.addUser({
