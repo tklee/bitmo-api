@@ -54,10 +54,13 @@ function init(app) {
 
 function findUserByNumber(aNumber, cb) {
   User.find({ "number": aNumber }, function (err, docs) {
-    // dangerous to keep waiting
     if (docs[0]) {
+      console.log('docs[0] exists');
+      console.log(docs[0]);
       cb(true, docs[0])
     } else {
+      console.log('docs[0] does not exist');
+      console.log(docs[0]);
       cb(false, docs[0])
     }
   })
