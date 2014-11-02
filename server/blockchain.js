@@ -20,12 +20,12 @@ function ping(cb) {
 }
 
 function sendPayment(guid, password, to, amt, cb) {
-  var path = '/merchant' + guid + '/payment';
+  var path = '/merchant/' + guid + '/payment';
 
   agent.post(getBlockchainUrl(path))
     .set('Content-Type', 'application/x-www-form-urlencoded')
     .accept('application/json')
-    .send({ 'main_password' : password, 'to' : to})
+    .send({ 'main_password' : password, 'to' : to, 'amount' : amt})
     .end(function(res) {
       if (res.status == "200") {
         try {
