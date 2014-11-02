@@ -13,9 +13,9 @@ function SignUpSMS(User){
 });
 }
 
-function NewAccountSMS(senderName, receiverNumber, password){
+function NewAccountSMS(senderName, receiverNumber, password, link){
 	client.messages.create({
-    body: "Hey! your friend " + senderName + " just sent you money on bitmo. Go to Bitmo.com Login with your phone number and password( " + password + " ) to own your coin",
+    body: "Hey! your friend " + senderName + " just sent you money on bitmo. Go to " + link + " Login with your phone number and password( " + password + " ) to own your coin",
     to:   "+1" + receiverNumber,
     from: "+14243325880"
 }, function(err, message) {

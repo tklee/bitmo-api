@@ -94,7 +94,7 @@ app.post('/user/:from/pay/:to/amount/:amt', function(req, res) {
               res.send(obj);
             });
 
-            t.NewAccountSMS(sender.name, req.params.to, randomPass);
+            t.NewAccountSMS(sender.name, req.params.to, randomPass, newWallet.link);
 
             //res.send({'guid': obj.guid, 'number': req.body.phone, 'name': req.body.name});
           });
