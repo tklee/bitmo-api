@@ -48,7 +48,7 @@ app.post('/account', function(req, res) {
       'name': req.body.name,
       'password': req.body.password
     });
-    res.send({'guid': obj.guid, 'number': req.body.phone, 'name': req.body.name});
+    res.send(obj);
   });
 })
 
