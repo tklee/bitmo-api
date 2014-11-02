@@ -18,19 +18,30 @@ function addUser(aUser) {
   });
 }
 
+// function init(app) {
+//   app.get('/findTest', function (req, res, next) {
+//     findUserByNumber(req.number, function(bRes, result) {
+//       if (bRes) {
+//         req.user = result;
+//       	next();
+//       } else {
+// 	res.send(404, 'Invalid request');
+//       }
+//     });
+// }, function(req, res) {
+// 	res.send(req.user);
+//   });
+// }
+
 function init(app) {
-  app.get('/findTest', function (req, res, next) {
+  app.get('/findTest', function (req, res) {
     findUserByNumber("4082223333", function(bRes, result) {
       if (bRes) {
-        req.user = result;
-	cb(req.user);
-      	next();
+        res.send(result);
       } else {
-	res.send(404, 'Invalid request');
+        res.send(result);
       }
     });
-}, function(req, res) {
-	res.send(req.user);
   });
 }
 
