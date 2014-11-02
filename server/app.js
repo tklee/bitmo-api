@@ -62,6 +62,15 @@ app.post('/user/:phone/pay/:to/amount/:amt', function(req, res) {
       res.send({});
     }
   });
+  u.findUserByNumber(req.params.phone, function(bRes, result) {
+    if (bRes) {
+      blockchain.sendPayment(result.guid, result.password, req.params.to, req.params.amt, function(obj) {
+        res.send(obj);
+      });
+    } else {
+      res.send({});
+    }
+  });
 })
 
 var server = app.listen(3000, function () {

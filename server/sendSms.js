@@ -6,7 +6,7 @@ var client = require('twilio')(accountSid, authToken);
 function SignUpSMS(User){
 	client.messages.create({
     body: "Hello " + User.name + " You have requested to make a Bitmo ",
-    to:   "+1" + User.phoneNumber,
+    to:   "+1" + User.number,
     from: "+14243325880"
 }, function(err, message) {
     process.stdout.write(message.sid);
@@ -16,7 +16,7 @@ function SignUpSMS(User){
 function NewAccountSMS(Sender , Receiver){
 	client.messages.create({
     body: "Hey! your friend " + Sender.name + " just sent you money on bitmo. Go to Bitmo.com Login with your phone number and password( " + Receiver.password + " ) to own your coin",
-    to:   "+1" + Receiver.phoneNumber,
+    to:   "+1" + Receiver.number,
     from: "+14243325880"
 }, function(err, message) {
     process.stdout.write(message.sid);
