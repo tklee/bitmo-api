@@ -5,6 +5,7 @@ var u = require('./users.js')
 var t = require('./sendSms.js')
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+var sleep = require('sleep');
 
 
 app.use(logger('dev'));
@@ -67,6 +68,8 @@ app.post('/user/:from/pay/:to/amount/:amt', function(req, res) {
       u.findUserByNumber(req.params.to, function(receiverFound, receiver) {
 
         if (receiverFound) {
+            console.log('receiver.address');
+            console.log(receiver.address);
           blockchain.sendPayment(sender.guid, sender.password, receiver.address, req.params.amt, function(obj) {
             res.send(obj);
           });
@@ -82,6 +85,10 @@ app.post('/user/:from/pay/:to/amount/:amt', function(req, res) {
               'name': '',
               'password': randomPass
             });
+
+            console.log('newWallet.address');
+            console.log(newWallet.address);
+            sleep.sleep(10);
 
             blockchain.sendPayment(sender.guid, sender.password, newWallet.address, req.params.amt, function(obj) {
               res.send(obj);
