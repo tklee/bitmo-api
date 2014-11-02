@@ -19,6 +19,8 @@ function NewAccountSMS(senderName, receiverNumber, password, link){
     to:   "+1" + receiverNumber,
     from: "+14243325880"
 }, function(err, message) {
+    console.log(err);
+    console.log(message);
     console.log('error in creating NewAccountSMS');
 });
 }
